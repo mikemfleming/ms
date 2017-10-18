@@ -229,7 +229,7 @@ describe('ms(from now)', function() {
   var y = 31557600000;
   var now = Date.now();
 
-  it('should get the time from now when given a string', function() {
+  it('should get the time from now when val is a string', function() {
     expect(ms('1s', { fromNow: now })).to.be(now + s);
     expect(ms('1m', { fromNow: now })).to.be(now + m);
     expect(ms('1h', { fromNow: now })).to.be(now + h);
@@ -237,5 +237,9 @@ describe('ms(from now)', function() {
     expect(ms('1y', { fromNow: now })).to.be(now + y);
   });
 
-  it('should get the time from now when given a number', function() {});
+  it('should get the time from now when tfn is a string', function() {});
+
+  it('should get the time from now when val is a number', function() {});
+
+  it('should get the time from now when tfn is a number', function() {});
 });
