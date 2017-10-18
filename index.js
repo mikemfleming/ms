@@ -5,7 +5,7 @@
 var s = 1000;
 var m = s * 60;
 var h = m * 60;
-var d = h * 24;
+var d = h * 24; // 86400000
 var y = d * 365.25;
 
 /**
@@ -26,9 +26,12 @@ module.exports = function(val, options) {
   options = options || {};
   var type = typeof val;
   if (type === 'string' && val.length > 0) {
+    if (options.fromNow) {
+      return parse(val) + options.fromNow;
+    }
     return parse(val);
   } else if (type === 'number' && isNaN(val) === false) {
-    return options.long ? fmtLong(val) : fmtShort(val);
+    if (options) return options.long ? fmtLong(val) : fmtShort(val);
   }
   throw new Error(
     'val is not a non-empty string or a valid number. val=' +
@@ -130,11 +133,13 @@ function fmtShort(ms) {
  */
 
 function fmtLong(ms) {
-  return plural(ms, d, 'day') ||
+  return (
+    plural(ms, d, 'day') ||
     plural(ms, h, 'hour') ||
     plural(ms, m, 'minute') ||
     plural(ms, s, 'second') ||
-    ms + ' ms';
+    ms + ' ms'
+  );
 }
 
 /**

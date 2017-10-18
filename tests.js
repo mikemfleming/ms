@@ -219,3 +219,23 @@ describe('ms(invalid inputs)', function() {
     }).to.throwError();
   });
 });
+
+// fromNow
+describe('ms(from now)', function() {
+  var s = 1000;
+  var m = 60000;
+  var h = 3600000;
+  var d = 86400000;
+  var y = 31557600000;
+  var now = Date.now();
+
+  it('should get the time from now when given a string', function() {
+    expect(ms('1s', { fromNow: now })).to.be(now + s);
+    expect(ms('1m', { fromNow: now })).to.be(now + m);
+    expect(ms('1h', { fromNow: now })).to.be(now + h);
+    expect(ms('1d', { fromNow: now })).to.be(now + d);
+    expect(ms('1y', { fromNow: now })).to.be(now + y);
+  });
+
+  it('should get the time from now when given a number', function() {});
+});
